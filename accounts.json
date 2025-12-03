@@ -1,0 +1,1410 @@
+[
+  {
+    "id": "penerimaan_kas_dari_pelanggan",
+    "name": "Penerimaan kas dari pelanggan",
+    "category": "other",
+    "group": "arus_kas_operasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 52449635405,
+      "2024-12-31": 48871082700
+    },
+    "is_total": false
+  },
+  {
+    "id": "pembayaran_kas_kepada_pemasok_dan_karyawan",
+    "name": "Pembayaran kas kepada pemasok dan karyawan",
+    "category": "other",
+    "group": "arus_kas_operasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -52256810632,
+      "2024-12-31": -47027014861
+    },
+    "is_total": false
+  },
+  {
+    "id": "kas_yang_digunakan_untuk_aktivitas_operasi",
+    "name": "Kas yang digunakan untuk aktivitas operasi",
+    "category": "other",
+    "group": "arus_kas_operasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 192824773,
+      "2024-12-31": 1844067839
+    },
+    "is_total": false
+  },
+  {
+    "id": "pendapatan_bunga",
+    "name": "Pendapatan bunga",
+    "category": "other",
+    "group": "arus_kas_operasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 37664654,
+      "2024-12-31": 23847086
+    },
+    "is_total": false
+  },
+  {
+    "id": "beban_bunga",
+    "name": "Beban bunga",
+    "category": "other",
+    "group": "arus_kas_operasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -410853806,
+      "2024-12-31": -451295551
+    },
+    "is_total": false
+  },
+  {
+    "id": "pajak_penghasilan_kas_flow",
+    "name": "Pajak penghasilan",
+    "category": "other",
+    "group": "arus_kas_operasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -388800672,
+      "2024-12-31": -2026789881
+    },
+    "is_total": false
+  },
+  {
+    "id": "kas_neto_yang_digunakan_untuk_aktivitas_operasi",
+    "name": "Kas Neto yang Digunakan untuk Aktivitas Operasi",
+    "category": "other",
+    "group": "arus_kas_operasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -569165051,
+      "2024-12-31": -610170507
+    },
+    "is_total": true
+  },
+
+  {
+    "id": "divestasi_entitas_anak_neto",
+    "name": "Divestasi entitas anak - neto dari kas yang di divestasi di anak-anak perusahaan",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 75277094,
+      "2024-12-31": -9470858
+    },
+    "is_total": false
+  },
+  {
+    "id": "pengurangan_modal_pada_entitas_asosiasi",
+    "name": "Pengurangan modal pada entitas asosiasi",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 31695007,
+      "2024-12-31": 0
+    },
+    "is_total": false
+  },
+  {
+    "id": "hasil_penjualan_aset_tetap",
+    "name": "Hasil penjualan aset tetap",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 8066892,
+      "2024-12-31": 21195169
+    },
+    "is_total": false
+  },
+  {
+    "id": "pembelian_aset_takberwujud",
+    "name": "Pembelian aset takberwujud",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -6642794,
+      "2024-12-31": -28685302
+    },
+    "is_total": false
+  },
+  {
+    "id": "penambahan_uang_jaminan",
+    "name": "Penambahan uang jaminan",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -35528416,
+      "2024-12-31": -15154039
+    },
+    "is_total": false
+  },
+  {
+    "id": "penambahan_aset_hak_guna_dan_sewa",
+    "name": "Penambahan aset hak-guna dan sewa",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -82845200,
+      "2024-12-31": -62165583
+    },
+    "is_total": false
+  },
+  {
+    "id": "penambahan_investasi_pada_entitas_asosiasi_dan_ventura_bersama",
+    "name": "Penambahan investasi pada entitas asosiasi dan ventura bersama",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -202775000,
+      "2024-12-31": -37806000
+    },
+    "is_total": false
+  },
+  {
+    "id": "pembelian_aset_tetap_dan_uang_muka_pembelian_aset_tetap",
+    "name": "Pembelian aset tetap dan uang muka pembelian aset tetap",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -584413052,
+      "2024-12-31": -559438699
+    },
+    "is_total": false
+  },
+  {
+    "id": "kas_neto_yang_digunakan_untuk_aktivitas_investasi",
+    "name": "Kas Neto yang Digunakan untuk Aktivitas Investasi",
+    "category": "other",
+    "group": "arus_kas_investasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -797165469,
+      "2024-12-31": -691525312
+    },
+    "is_total": true
+  },
+
+  {
+    "id": "penerimaan_dari_utang_bank",
+    "name": "Penerimaan dari utang bank",
+    "category": "other",
+    "group": "arus_kas_pendanaan",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 2415243451,
+      "2024-12-31": 2356431728
+    },
+    "is_total": false
+  },
+  {
+    "id": "setoran_modal_ke_entitas_anak_dari_kepentingan_nonpengendali",
+    "name": "Setoran modal ke entitas anak dari kepentingan nonpengendali",
+    "category": "other",
+    "group": "arus_kas_pendanaan",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 33987379,
+      "2024-12-31": 7034772
+    },
+    "is_total": false
+  },
+  {
+    "id": "dividen_kas_untuk_minoritas",
+    "name": "Dividen kas untuk minoritas",
+    "category": "other",
+    "group": "arus_kas_pendanaan",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -8619280,
+      "2024-12-31": -10774004
+    },
+    "is_total": false
+  },
+  {
+    "id": "dividen_tunai",
+    "name": "Dividen",
+    "category": "other",
+    "group": "arus_kas_pendanaan",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -299886213,
+      "2024-12-31": -268319243
+    },
+    "is_total": false
+  },
+  {
+    "id": "pembayaran_liabilitas_sewa",
+    "name": "Liabilitas sewa",
+    "category": "other",
+    "group": "arus_kas_pendanaan",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -596773523,
+      "2024-12-31": -490923983
+    },
+    "is_total": false
+  },
+  {
+    "id": "pinjaman_kepada_pihak_berelasi",
+    "name": "Pinjaman kepada pihak berelasi",
+    "category": "other",
+    "group": "arus_kas_pendanaan",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 0,
+      "2024-12-31": -29000000
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_pembiayaan_konsumen",
+    "name": "Utang pembiayaan konsumen",
+    "category": "other",
+    "group": "arus_kas_pendanaan",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 0,
+      "2024-12-31": -21908
+    },
+    "is_total": false
+  },
+  {
+    "id": "kas_neto_yang_diperoleh_dari_aktivitas_pendanaan",
+    "name": "Kas Neto yang diperoleh dari Aktivitas Pendanaan",
+    "category": "other",
+    "group": "arus_kas_pendanaan",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1543951814,
+      "2024-12-31": 1564427362
+    },
+    "is_total": true
+  },
+
+  {
+    "id": "kenaikan_penurunan_neto_kas_dan_setara_kas",
+    "name": "Kenaikan (Penurunan) Neto Kas dan Setara Kas",
+    "category": "other",
+    "group": "arus_kas_rekonsiliasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 177621294,
+      "2024-12-31": 262731543
+    },
+    "is_total": false
+  },
+  {
+    "id": "kas_dan_setara_kas_awal_periode_cf",
+    "name": "Kas dan Setara Kas Awal Periode",
+    "category": "other",
+    "group": "arus_kas_rekonsiliasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1627644450,
+      "2024-12-31": 1177967103
+    },
+    "is_total": false
+  },
+  {
+    "id": "kas_dan_setara_kas_akhir_periode_cf",
+    "name": "Kas dan Setara Kas Akhir Periode",
+    "category": "other",
+    "group": "arus_kas_rekonsiliasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1805265744,
+      "2024-12-31": 1440698646
+    },
+    "is_total": true
+  },
+  {
+    "id": "kas_dan_setara_kas_komponen",
+    "name": "Kas dan setara kas",
+    "category": "other",
+    "group": "arus_kas_rekonsiliasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1811014157,
+      "2024-12-31": 1700765318
+    },
+    "is_total": false
+  },
+  {
+    "id": "cerukan",
+    "name": "Cerukan",
+    "category": "other",
+    "group": "arus_kas_rekonsiliasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -5748413,
+      "2024-12-31": -260066672
+    },
+    "is_total": false
+  },
+  {
+    "id": "kas_dan_setara_kas_akhir_periode_cf_komponen",
+    "name": "Kas dan Setara Kas Akhir Periode",
+    "category": "other",
+    "group": "arus_kas_rekonsiliasi",
+    "statement": "cash_flows",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1805265744,
+      "2024-12-31": 1440698646
+    },
+    "is_total": true
+  },
+  {
+    "id": "kas_dan_setara_kas",
+    "name": "Kas dan setara kas",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1811014157,
+      "2024-12-31": 1765745896
+    },
+    "is_total": false
+  },
+  {
+    "id": "piutang_usaha_pihak_ketiga",
+    "name": "Piutang usaha - Pihak ketiga - neto",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1043333149,
+      "2024-12-31": 1086126825
+    },
+    "is_total": false
+  },
+  {
+    "id": "piutang_usaha_pihak_berelasi",
+    "name": "Piutang usaha - Pihak berelasi - neto",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 46049837,
+      "2024-12-31": 70359441
+    },
+    "is_total": false
+  },
+  {
+    "id": "piutang_lain_lain_pihak_ketiga",
+    "name": "Piutang lain-lain - Pihak ketiga - neto",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 685181788,
+      "2024-12-31": 373056179
+    },
+    "is_total": false
+  },
+  {
+    "id": "piutang_lain_lain_pihak_berelasi",
+    "name": "Piutang lain-lain - Pihak berelasi - neto",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 28121744,
+      "2024-12-31": 52817037
+    },
+    "is_total": false
+  },
+  {
+    "id": "persediaan_neto",
+    "name": "Persediaan - neto",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 12243674830,
+      "2024-12-31": 7130917914
+    },
+    "is_total": false
+  },
+  {
+    "id": "uang_muka",
+    "name": "Uang muka",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 344828938,
+      "2024-12-31": 300998283
+    },
+    "is_total": false
+  },
+  {
+    "id": "biaya_dibayar_dimuka_lancar",
+    "name": "Biaya dibayar di muka – bagian lancar",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 37726484,
+      "2024-12-31": 30279134
+    },
+    "is_total": false
+  },
+  {
+    "id": "pajak_dibayar_dimuka",
+    "name": "Pajak dibayar di muka",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 2104636505,
+      "2024-12-31": 1128565078
+    },
+    "is_total": false
+  },
+  {
+    "id": "aset_keuangan_lancar_lainnya",
+    "name": "Aset keuangan lancar lainnya",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 93648712,
+      "2024-12-31": 65002260
+    },
+    "is_total": false
+  },
+  {
+    "id": "taksiran_tagihan_pajak_penghasilan_lancar",
+    "name": "Taksiran tagihan pajak penghasilan (lancar)",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 35940270,
+      "2024-12-31": 1304229319
+    },
+    "is_total": false
+  },
+  {
+    "id": "total_aset_lancar",
+    "name": "TOTAL ASET LANCAR",
+    "category": "asset",
+    "group": "aset_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 18474156414,
+      "2024-12-31": 13308097366
+    },
+    "is_total": true
+  },
+
+  {
+    "id": "biaya_dibayar_dimuka_tidak_lancar",
+    "name": "Biaya dibayar di muka – bagian tidak lancar",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 540000,
+      "2024-12-31": 540000
+    },
+    "is_total": false
+  },
+  {
+    "id": "uang_muka_pembelian_aset_tetap_takberwujud",
+    "name": "Uang muka pembelian aset tetap dan aset takberwujud",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 285678543,
+      "2024-12-31": 186712460
+    },
+    "is_total": false
+  },
+  {
+    "id": "aset_tetap_neto",
+    "name": "Aset tetap - neto",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 2457550984,
+      "2024-12-31": 2492668559
+    },
+    "is_total": false
+  },
+  {
+    "id": "aset_takberwujud_neto",
+    "name": "Aset takberwujud - neto",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 789918333,
+      "2024-12-31": 825813431
+    },
+    "is_total": false
+  },
+  {
+    "id": "aset_hak_guna_neto",
+    "name": "Aset hak-guna - neto",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1877705337,
+      "2024-12-31": 1797063319
+    },
+    "is_total": false
+  },
+  {
+    "id": "properti_investasi_neto",
+    "name": "Properti investasi - neto",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 15231084,
+      "2024-12-31": 14173024
+    },
+    "is_total": false
+  },
+  {
+    "id": "aset_pajak_tangguhan_neto",
+    "name": "Aset pajak tangguhan - neto",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 252969048,
+      "2024-12-31": 221813412
+    },
+    "is_total": false
+  },
+  {
+    "id": "investasi_entitas_asosiasi_ventura_bersama",
+    "name": "Investasi pada entitas asosiasi dan ventura bersama",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 639518833,
+      "2024-12-31": 427854913
+    },
+    "is_total": false
+  },
+  {
+    "id": "taksiran_tagihan_pajak_penghasilan_tidak_lancar",
+    "name": "Taksiran tagihan pajak penghasilan (tidak lancar)",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 3582709530,
+      "2024-12-31": 2334847237
+    },
+    "is_total": false
+  },
+  {
+    "id": "aset_keuangan_lainnya_tidak_lancar",
+    "name": "Aset keuangan lainnya",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 182879828,
+      "2024-12-31": 158893776
+    },
+    "is_total": false
+  },
+  {
+    "id": "aset_tidak_lancar_lainnya",
+    "name": "Aset tidak lancar lainnya",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 8105705,
+      "2024-12-31": 5912762
+    },
+    "is_total": false
+  },
+  {
+    "id": "total_aset_tidak_lancar",
+    "name": "TOTAL ASET TIDAK LANCAR",
+    "category": "asset",
+    "group": "aset_tidak_lancar",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 10092807225,
+      "2024-12-31": 8466292893
+    },
+    "is_total": true
+  },
+  {
+    "id": "total_aset",
+    "name": "TOTAL ASET",
+    "category": "asset",
+    "group": "total_aset",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 28566963639,
+      "2024-12-31": 21774390259
+    },
+    "is_total": true
+  },
+
+  {
+    "id": "utang_bank_jangka_pendek",
+    "name": "Utang bank jangka pendek",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 4411081825,
+      "2024-12-31": 2733983958
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_usaha_pihak_ketiga",
+    "name": "Utang usaha - Pihak ketiga",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 6948302764,
+      "2024-12-31": 3847848266
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_usaha_pihak_berelasi",
+    "name": "Utang usaha - Pihak berelasi",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 33401947,
+      "2024-12-31": 22032276
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_lain_lain_pihak_ketiga",
+    "name": "Utang lain-lain - Pihak ketiga",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 2017697484,
+      "2024-12-31": 1604453780
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_lain_lain_pihak_berelasi",
+    "name": "Utang lain-lain - Pihak berelasi",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 56733784,
+      "2024-12-31": 52595980
+    },
+    "is_total": false
+  },
+  {
+    "id": "beban_akrual",
+    "name": "Beban akrual",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 116270109,
+      "2024-12-31": 109930791
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_pajak",
+    "name": "Utang pajak",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 245993327,
+      "2024-12-31": 101888767
+    },
+    "is_total": false
+  },
+  {
+    "id": "liabilitas_imbalankerja_jangka_pendek",
+    "name": "Liabilitas imbalan kerja jangka pendek",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 102874658,
+      "2024-12-31": 91946319
+    },
+    "is_total": false
+  },
+  {
+    "id": "pendapatan_diterima_dimuka",
+    "name": "Pendapatan diterima di muka",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 3081387,
+      "2024-12-31": 3837763
+    },
+    "is_total": false
+  },
+  {
+    "id": "liabilitas_keuangan_jangka_pendek_lainnya",
+    "name": "Liabilitas keuangan jangka pendek lainnya",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 0,
+      "2024-12-31": 151172
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_bank_jangka_panjang_current",
+    "name": "Utang bank jangka panjang - bagian lancar",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 604170513,
+      "2024-12-31": 1683851747
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_obligasi_current",
+    "name": "Utang obligasi - bagian lancar",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 634534514,
+      "2024-12-31": 0
+    },
+    "is_total": false
+  },
+  {
+    "id": "liabilitas_sewa_current",
+    "name": "Liabilitas sewa - bagian lancar",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 632531444,
+      "2024-12-31": 623460225
+    },
+    "is_total": false
+  },
+  {
+    "id": "total_liabilitas_jangka_pendek",
+    "name": "TOTAL LIABILITAS JANGKA PENDEK",
+    "category": "liability",
+    "group": "liabilitas_jangka_pendek",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 15806673756,
+      "2024-12-31": 10875981044
+    },
+    "is_total": true
+  },
+
+  {
+    "id": "utang_bank_jangka_panjang_noncurrent",
+    "name": "Utang bank jangka panjang",
+    "category": "liability",
+    "group": "liabilitas_jangka_panjang",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 2108485629,
+      "2024-12-31": 423011844
+    },
+    "is_total": false
+  },
+  {
+    "id": "utang_obligasi_noncurrent",
+    "name": "Utang obligasi",
+    "category": "liability",
+    "group": "liabilitas_jangka_panjang",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 0,
+      "2024-12-31": 573317975
+    },
+    "is_total": false
+  },
+  {
+    "id": "liabilitas_sewa_noncurrent",
+    "name": "Liabilitas sewa",
+    "category": "liability",
+    "group": "liabilitas_jangka_panjang",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 539401208,
+      "2024-12-31": 466912979
+    },
+    "is_total": false
+  },
+  {
+    "id": "liabilitas_pajak_tangguhan_neto",
+    "name": "Liabilitas pajak tangguhan - neto",
+    "category": "liability",
+    "group": "liabilitas_jangka_panjang",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 12816055,
+      "2024-12-31": 22013955
+    },
+    "is_total": false
+  },
+  {
+    "id": "liabilitas_imbalankerja_jangka_panjang",
+    "name": "Liabilitas imbalan kerja jangka panjang",
+    "category": "liability",
+    "group": "liabilitas_jangka_panjang",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 459381162,
+      "2024-12-31": 355758189
+    },
+    "is_total": false
+  },
+  {
+    "id": "total_liabilitas_jangka_panjang",
+    "name": "TOTAL LIABILITAS JANGKA PANJANG",
+    "category": "liability",
+    "group": "liabilitas_jangka_panjang",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 3120084054,
+      "2024-12-31": 1841014942
+    },
+    "is_total": true
+  },
+  {
+    "id": "total_liabilitas",
+    "name": "TOTAL LIABILITAS",
+    "category": "liability",
+    "group": "total_liabilitas",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 18926757810,
+      "2024-12-31": 12716995986
+    },
+    "is_total": true
+  },
+
+
+  {
+    "id": "modal_ditempatkan_dan_disetor_penuh",
+    "name": "Modal ditempatkan dan disetor penuh - 15.950.000.000 saham",
+    "category": "equity",
+    "group": "ekuitas_pemilik",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1595000000,
+      "2024-12-31": 1595000000
+    },
+    "is_total": false
+  },
+  {
+    "id": "tambahan_modal_disetor_neto",
+    "name": "Tambahan modal disetor - neto",
+    "category": "equity",
+    "group": "ekuitas_pemilik",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 617736825,
+      "2024-12-31": 598379152
+    },
+    "is_total": false
+  },
+  {
+    "id": "saham_treasuri",
+    "name": "Saham treasuri",
+    "category": "equity",
+    "group": "ekuitas_pemilik",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -63804128,
+      "2024-12-31": -63804128
+    },
+    "is_total": false
+  },
+  {
+    "id": "selisih_transaksi_dengan_pihak_nonpengendali",
+    "name": "Selisih transaksi dengan pihak nonpengendali",
+    "category": "equity",
+    "group": "ekuitas_pemilik",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 19753017,
+      "2024-12-31": 19242434
+    },
+    "is_total": false
+  },
+  {
+    "id": "saldo_laba_ditentukan_penggunaannya",
+    "name": "Saldo laba - Telah ditentukan penggunaannya",
+    "category": "equity",
+    "group": "ekuitas_pemilik",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 15000000,
+      "2024-12-31": 14000000
+    },
+    "is_total": false
+  },
+  {
+    "id": "saldo_laba_belum_ditentukan_penggunaannya",
+    "name": "Saldo laba - Belum ditentukan penggunaannya",
+    "category": "equity",
+    "group": "ekuitas_pemilik",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 6416011968,
+      "2024-12-31": 5931324240
+    },
+    "is_total": false
+  },
+  {
+    "id": "penghasilan_komprehensif_lain",
+    "name": "Penghasilan komprehensif lain",
+    "category": "equity",
+    "group": "ekuitas_pemilik",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 84191425,
+      "2024-12-31": 40111113
+    },
+    "is_total": false
+  },
+  {
+    "id": "total_ekuitas_pemilik",
+    "name": "TOTAL EKUITAS YANG DAPAT DIATRIBUSIKAN KEPADA PEMILIK ENTITAS INDUK",
+    "category": "equity",
+    "group": "ekuitas_pemilik",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 8683889107,
+      "2024-12-31": 8134252811
+    },
+    "is_total": true
+  },
+  {
+    "id": "kepentingan_nonpengendali",
+    "name": "Kepentingan nonpengendali",
+    "category": "equity",
+    "group": "non_controlling_interest",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 956316722,
+      "2024-12-31": 923141462
+    },
+    "is_total": false
+  },
+  {
+    "id": "total_ekuitas",
+    "name": "TOTAL EKUITAS",
+    "category": "equity",
+    "group": "total_ekuitas",
+    "statement": "financial_position",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 9640205829,
+      "2024-12-31": 9057394273
+    },
+    "is_total": true
+  },
+  {
+    "id": "penjualan_neto",
+    "name": "Penjualan neto",
+    "category": "revenue",
+    "group": "pendapatan_operasional",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 52364380092,
+      "2024-12-31": 48607788538
+    },
+    "is_total": false
+  },
+  {
+    "id": "beban_pokok_penjualan",
+    "name": "Beban pokok penjualan",
+    "category": "expense",
+    "group": "beban_pokok",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -46518141565,
+      "2024-12-31": -43171890136
+    },
+    "is_total": false
+  },
+  {
+    "id": "laba_bruto",
+    "name": "Laba bruto",
+    "category": "other",
+    "group": "subtotal_laba_rugi",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 5846238527,
+      "2024-12-31": 5435898402
+    },
+    "is_total": true
+  },
+  {
+    "id": "beban_penjualan_dan_distribusi",
+    "name": "Beban penjualan dan distribusi",
+    "category": "expense",
+    "group": "beban_operasional",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -2649909014,
+      "2024-12-31": -2194195236
+    },
+    "is_total": false
+  },
+  {
+    "id": "beban_umum_dan_administrasi",
+    "name": "Beban umum dan administrasi",
+    "category": "expense",
+    "group": "beban_operasional",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -2059510142,
+      "2024-12-31": -1952897792
+    },
+    "is_total": false
+  },
+  {
+    "id": "pendapatan_lainnya",
+    "name": "Pendapatan lainnya",
+    "category": "revenue",
+    "group": "pendapatan_lain",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 507418282,
+      "2024-12-31": 372214069
+    },
+    "is_total": false
+  },
+  {
+    "id": "beban_lainnya",
+    "name": "Beban lainnya",
+    "category": "expense",
+    "group": "beban_lain",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -29580903,
+      "2024-12-31": -33167677
+    },
+    "is_total": false
+  },
+  {
+    "id": "laba_usaha",
+    "name": "Laba usaha",
+    "category": "other",
+    "group": "subtotal_laba_rugi",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1614656750,
+      "2024-12-31": 1627851766
+    },
+    "is_total": true
+  },
+  {
+    "id": "pendapatan_keuangan",
+    "name": "Pendapatan keuangan",
+    "category": "revenue",
+    "group": "pendapatan_keuangan",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 37664654,
+      "2024-12-31": 23847086
+    },
+    "is_total": false
+  },
+  {
+    "id": "bagian_rugi_bersih_entitas_asosiasi_ventura_bersama",
+    "name": "Bagian rugi bersih entitas asosiasi dan ventura bersama",
+    "category": "expense",
+    "group": "bagian_laba_rugi_investasi",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 3355676,
+      "2024-12-31": -8285308
+    },
+    "is_total": false
+  },
+  {
+    "id": "biaya_keuangan",
+    "name": "Biaya keuangan",
+    "category": "expense",
+    "group": "beban_keuangan",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -474580440,
+      "2024-12-31": -503390509
+    },
+    "is_total": false
+  },
+  {
+    "id": "laba_sebelum_pajak_penghasilan",
+    "name": "Laba sebelum pajak penghasilan",
+    "category": "other",
+    "group": "subtotal_laba_rugi",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 1181096640,
+      "2024-12-31": 1140023035
+    },
+    "is_total": true
+  },
+  {
+    "id": "beban_pajak_penghasilan_neto",
+    "name": "Beban pajak penghasilan - neto",
+    "category": "expense",
+    "group": "beban_pajak",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": -332345339,
+      "2024-12-31": -287077248
+    },
+    "is_total": false
+  },
+  {
+    "id": "laba_periode_berjalan",
+    "name": "Laba periode berjalan",
+    "category": "other",
+    "group": "hasil_bersih",
+    "statement": "profit_or_loss",
+    "currency": "IDR",
+    "unit": "thousand",
+    "balances": {
+      "2025-09-30": 848751301,
+      "2024-12-31": 852945787
+    },
+    "is_total": true
+  }
+]

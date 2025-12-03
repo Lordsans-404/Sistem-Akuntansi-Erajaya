@@ -1,0 +1,22 @@
+[
+  {
+    "id": "2025-09-30",
+    "code": "2025-09-30",
+    "label": "Periode Berakhir 30 September 2025",
+    "startDate": "2025-01-01",
+    "endDate": "2025-09-30",
+    "type": "interim",
+    "year": 2025,
+    "month": 9
+  },
+  {
+    "id": "2024-12-31",
+    "code": "2024-12-31",
+    "label": "Periode Berakhir 31 Desember 2024",
+    "startDate": "2024-01-01",
+    "endDate": "2024-12-31",
+    "type": "annual",
+    "year": 2024,
+    "month": 12
+  }
+]
