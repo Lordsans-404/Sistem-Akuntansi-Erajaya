@@ -14,6 +14,12 @@ serviceKey.json
 # testing
 /coverage
 
+# Unnecessary
+periods.json
+accounts.json
+reports.json
+seedAccount.js
+
 # next.js
 /.next/
 /out/
