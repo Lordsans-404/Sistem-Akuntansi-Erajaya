@@ -28,20 +28,23 @@ const Navbar: React.FC<NavbarProps> = ({
 }) => {
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[rgba(20,20,25,0.85)] backdrop-blur-md'
-          : 'bg-[#111]'
-      }`}
+      className={`
+        fixed top-0 left-0 right-0 z-50 transition-all duration-300 
+        ${scrolled
+          ? 'bg-[rgba(15,15,18,0.6)] backdrop-blur-xl'
+          : 'bg-[rgba(10,10,12,0.3)] backdrop-blur-lg'
+        }
+      `}
     >
       {/* Wrapper navbar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo brand Erajaya Accounting */}
-          <a href="/" className="text-xl font-bold">
-            <span className="text-white">Erajaya</span>
-            <span className="text-[#00bcd4]"> Accounting</span>
-          </a>
+          <img
+            src="/logo-nav.png"
+            alt="Erajaya Logo"
+            className="h-15 w-auto object-contain select-none"
+          />
 
           {/* Menu desktop */}
           <div className="hidden md:flex space-x-8">
@@ -49,10 +52,16 @@ const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={idx}
                 href={`/laporan/?report=${item.href}`}
-                className="hover:text-[#00bcd4] transition-colors duration-200 text-sm"
+                className="
+                  hover:text-[#00bcd4]
+                  text-gray-300
+                  transition-all duration-200
+                  hover:drop-shadow-[0_0_6px_#00bcd4]
+                "
               >
                 {item.label}
               </a>
+
             ))}
           </div>
 

@@ -252,7 +252,8 @@ const ErajayaLandingPage: React.FC = () => {
 
                   {/* Tombol call-to-action di hero */}
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button
+                    <a
+                      href='/about-us'
                       className="
                         px-8 py-3
                         border-2 border-[#00bcd4]
@@ -262,20 +263,8 @@ const ErajayaLandingPage: React.FC = () => {
                         rounded-lg shadow-lg hover:shadow-[#00bcd4]/50
                       "
                     >
-                      Pelajari Sistem
-                    </button>
-
-                    <button
-                      className="
-                        px-8 py-3
-                        bg-[#00bcd4]
-                        hover:bg-[#1e88e5]
-                        transition-all duration-300
-                        rounded-lg shadow-lg hover:shadow-[#00bcd4]/50
-                      "
-                    >
-                      Lihat Demo
-                    </button>
+                      Tentang Perusahaan
+                    </a>
                   </div>
                 </div>
               </div>
@@ -400,7 +389,7 @@ const ErajayaLandingPage: React.FC = () => {
                 Laporan Keuangan
               </h3>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 gap-8">
                 {laporanItems.map((item, idx) => (
                   <a
                     key={idx}

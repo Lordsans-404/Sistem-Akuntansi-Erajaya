@@ -44,8 +44,7 @@ export default function AccountingDashboard() {
   
   const [scrolled, setScrolled] = useState<boolean>(false); // Menandai apakah halaman sudah discroll (ubah style navbar)
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false); // Menandai apakah menu mobile sedang terbuka
-  const [currentSlide, setCurrentSlide] = useState<number>(0); // Menyimpan index slide hero yang aktif
-
+  
   const searchParams = useSearchParams();
   const [reportType, setReportType] = useState(() => {
     // Logika ini hanya jalan SATU KALI saat komponen pertama kali muncul
@@ -111,64 +110,6 @@ export default function AccountingDashboard() {
     if (val >= 1000) return `${(val / 1000).toFixed(0)}Rb`;
     return val.toString();
   };
-
-  // Prepare chart data
-  const getChartData = () => {
-    if (!reportData?.sections) return { barData: [], pieData: [] };
-
-    const barData: any[] = [];
-    const pieData: any[] = [];
-
-    reportData.sections.forEach((section) => {
-      section.rows.forEach((row) => {
-        if (!row.isTotal && row.amount !== 0) {
-          barData.push({
-            name: row.name.length > 20 ? row.name.substring(0, 20) + '...' : row.name,
-            amount: Math.abs(row.amount),
-            fullName: row.name,
-          });
-          pieData.push({
-            name: row.name.length > 15 ? row.name.substring(0, 15) + '...' : row.name,
-            value: Math.abs(row.amount),
-            fullName: row.name,
-          });
-        }
-      });
-    });
-
-    return { barData: barData.slice(0, 8), pieData: pieData.slice(0, 6) };
-  };
-
-  const { barData, pieData } = getChartData();
-
-  // Calculate summary metrics
-  const getSummaryMetrics = () => {
-    if (!reportData?.sections) return null;
-
-    let totalAssets = 0;
-    let totalLiabilities = 0;
-    let totalEquity = 0;
-
-    reportData.sections.forEach((section) => {
-      section.rows.forEach((row) => {
-        if (row.isTotal) {
-          if (section.label.toLowerCase().includes('aset') || section.label.toLowerCase().includes('aktiva')) {
-            totalAssets += row.amount;
-          } else if (section.label.toLowerCase().includes('liabilitas') || section.label.toLowerCase().includes('kewajiban')) {
-            totalLiabilities += row.amount;
-          } else if (section.label.toLowerCase().includes('ekuitas') || section.label.toLowerCase().includes('modal')) {
-            totalEquity += row.amount;
-          }
-        }
-      });
-    });
-
-    return { totalAssets, totalLiabilities, totalEquity };
-  };
-
-  const metrics = getSummaryMetrics();
-
-  const COLORS = ['#00bcd4', '#1e88e5', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
 
   const reportTypes = [
     { value: 'balance-sheet', label: 'Neraca (Posisi Keuangan)', icon: '📊' },
