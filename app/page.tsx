@@ -122,31 +122,31 @@ const ErajayaLandingPage: React.FC = () => {
     {
       icon: <Wallet className="w-6 h-6" />,
       title: 'Elemen Aset',
-      href: 'income-statement',
+      href: '/akun/asset',
       desc: 'Kelola seluruh aset perusahaan secara terintegrasi',
     },
     {
       icon: <TrendingUp className="w-6 h-6" />,
       title: 'Elemen Beban',
-      href: 'income-statement',
+      href: '/akun/expense',
       desc: 'Monitoring dan analisis beban operasional',
     },
     {
       icon: <DollarSign className="w-6 h-6" />,
       title: 'Elemen Liabilitas',
-      href: 'income-statement',
+      href: '/akun/liability',
       desc: 'Pencatatan kewajiban finansial perusahaan',
     },
     {
       icon: <BarChart3 className="w-6 h-6" />,
       title: 'Elemen Penghasilan',
-      href: 'income-statement',
+      href: '/akun/revenue',
       desc: 'Tracking pendapatan dari berbagai sumber',
     },
     {
       icon: <PieChart className="w-6 h-6" />,
       title: 'Elemen Ekuitas',
-      href: 'income-statement',
+      href: '/akun/equity',
       desc: 'Manajemen modal dan ekuitas pemilik',
     },
   ];
@@ -347,9 +347,10 @@ const ErajayaLandingPage: React.FC = () => {
 
               <div className="flex flex-wrap gap-6 justify-center">
                 {akunItems.map((item, idx) => (
-                  <div
+                  <a
                     key={idx}
                     className="card-hover md:w-auto w-full p-6 rounded-xl border cursor-pointer"
+                    href={item.href}
                     style={{
                       backgroundColor: '#1a1a1f',
                       borderColor: '#2a2a2f',
@@ -375,7 +376,7 @@ const ErajayaLandingPage: React.FC = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>

@@ -10,23 +10,18 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 text-center">
         {/* Teks copyright */}
         <p className="text-gray-400 mb-4">
-          © 2025 Sistem Akuntansi Erajaya. Semua hak dilindungi.
+          © 2025 Sistem Akuntansi Erajaya. By Lordsans-404.
         </p>
 
         {/* Link kebijakan & syarat */}
         <div className="flex justify-center gap-6 text-sm">
           <a
-            href="#"
+            href="https://github.com/lordsans-404"
             className="text-gray-500 hover:text-[#00bcd4] transition-colors"
           >
-            Kebijakan Privasi
+            My Page
           </a>
-          <a
-            href="#"
-            className="text-gray-500 hover:text-[#00bcd4] transition-colors"
-          >
-            Syarat &amp; Ketentuan
-          </a>
+          
         </div>
       </div>
     </footer>

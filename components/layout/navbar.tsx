@@ -40,11 +40,13 @@ const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo brand Erajaya Accounting */}
-          <img
-            src="/logo-nav.png"
-            alt="Erajaya Logo"
-            className="h-15 w-auto object-contain select-none"
-          />
+          <a href="/">
+            <img
+              src="/logo-nav.png"
+              alt="Erajaya Logo"
+              className="h-15 w-auto object-contain select-none"
+            />
+          </a>
 
           {/* Menu desktop */}
           <div className="hidden md:flex space-x-8">
