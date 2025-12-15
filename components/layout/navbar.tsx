@@ -16,11 +16,11 @@ const laporanItems: MenuItem[] = [
 ];
 
 const akunItems: MenuItem[] = [
-  { label: 'Kas', href: 'kas' },
-  { label: 'Bank', href: 'bank' },
-  { label: 'Piutang', href: 'piutang' },
-  { label: 'Persediaan', href: 'persediaan' },
-  { label: 'Aset Tetap', href: 'aset-tetap' },
+  { label: 'Aset', href: '/akun/asset' },
+  { label: 'Beban', href: '/akun/expense' },
+  { label: 'Liabilitas', href: '/akun/liability' },
+  { label: 'Penghasilan', href: '/akun/revenue' },
+  { label: 'Ekuitas', href: '/akun/equity' },
 ];
 
 interface NavbarProps {
@@ -105,7 +105,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   hover:drop-shadow-[0_0_6px_#00bcd4]
                 "
               >
-                <span>Akun-Akun</span>
+                <span>COA</span>
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${asetDropdownOpen ? 'rotate-180' : ''
                     }`}
@@ -117,7 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   {akunItems.map((item, idx) => (
                     <a
                       key={idx}
-                      href={`/akun-aset/${item.href}`}
+                      href={`${item.href}`}
                       className="
                         block px-4 py-3 text-gray-300
                         hover:bg-[#252530] hover:text-[#00bcd4]
