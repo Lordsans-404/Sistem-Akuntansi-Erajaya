@@ -46,3 +46,21 @@ export interface AccountData {
   is_total: boolean;
   statement: string;
 }
+
+export interface JournalEntryItem {
+  account_id: string;
+  debit: number;
+  credit: number;
+}
+
+export interface JournalTransaction {
+  id?: string;
+  created_at?: string | Date; // Use string for simplified JSON, or Date
+  date: string;
+  description: string;
+  entries: JournalEntryItem[];
+  period: string; // "YYYY-MM-DD" or code
+  status: "draft" | "posted";
+  total_credit: number;
+  total_debit: number;
+}
