@@ -80,7 +80,6 @@ export default function JournalListPage() {
                         href="/journal/create"
                         className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2 group"
                     >
-                        <Plus size={18} />
                         Buat Jurnal Baru
                         <ArrowRight size={16} className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                     </a>
@@ -161,7 +160,7 @@ export default function JournalListPage() {
                                                     #{journal.id?.substring(0, 6)}
                                                 </span>
                                             </div>
-                                            <p className="text-gray-400 text-sm">{journal.description}</p>
+                                            <p className="text-gray-400 text-sm"><b>Deskripsi Transaksi </b>: {journal.description}</p>
                                         </div>
                                         <div className="text-right">
                                             <span className="block text-xl font-bold text-white tracking-tight">
@@ -185,7 +184,7 @@ export default function JournalListPage() {
                                                 {journal.entries.map((entry, idx) => (
                                                     <tr key={idx} className="border-t border-[#2a2a2f]/50">
                                                         <td className="py-1.5 text-gray-300 pl-2 border-l-2 border-transparent hover:border-blue-500 transition-colors">
-                                                            {entry.account_id}
+                                                            {entry.account.name}
                                                         </td>
                                                         <td className="py-1.5 text-right text-gray-400 font-mono">
                                                             {entry.debit > 0 ? formatMoney(entry.debit) : '-'}

@@ -89,9 +89,18 @@ export async function GET(request: NextRequest) {
  * 7. Mengembalikan ID dokumen yang baru dibuat.
  */
 export async function POST(request: NextRequest) {
+  const password = process.env.PASSWORD_;
+
   try {
     const body = await request.json();
-    const { date, description, entries, period } = body;
+    const { date, description, entries, period, pass } = body;
+    
+    if(pass != password){
+      return NextResponse.json(
+        { error: "Wrong Password" },
+        { status: 401 }
+      );      
+    }
 
     if (!date || !description || !Array.isArray(entries) || entries.length < 2) {
       return NextResponse.json(
@@ -117,8 +126,7 @@ export async function POST(request: NextRequest) {
       totalCredit += credit;
 
       return {
-        account_id: e.account_id,
-        name: e.name,
+        account:e.account,
         debit,
         credit
       };

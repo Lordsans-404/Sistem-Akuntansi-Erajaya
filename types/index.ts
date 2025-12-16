@@ -48,7 +48,7 @@ export interface AccountData {
 }
 
 export interface JournalEntryItem {
-  account_id: string;
+  account: any;
   debit: number;
   credit: number;
 }
@@ -63,4 +63,12 @@ export interface JournalTransaction {
   status: "draft" | "posted";
   total_credit: number;
   total_debit: number;
+}
+
+export interface JournalAccountRef {
+  id: string;
+  name: string;
+  category: string;
+  group: string;
+  statement: string;
 }

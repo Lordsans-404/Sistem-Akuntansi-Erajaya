@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Save, FileText, Calendar, AlertCircle, CheckCircle2 } from 'lucide-react';
 import Navbar from '@/components/layout/navbar';
-import { AccountData } from '@/types/index';
+import { AccountData, JournalAccountRef } from '@/types/index';
 
 const PERIOD_CODE = "2025-09-30"; // Default or dynamic? User prompt implied 2025-09-30
 
@@ -34,6 +34,11 @@ export default function JournalPage() {
 
     const [submitting, setSubmitting] = useState(false);
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
+    const [showPinModal, setShowPinModal] = useState(false);
+    const [pin, setPin] = useState('');
+    const [pendingPayload, setPendingPayload] = useState<any>(null);
+
 
     // Fetch all accounts
     useEffect(() => {
@@ -135,54 +140,95 @@ export default function JournalPage() {
     const isBalanced = totalDebit === totalCredit && totalDebit > 0;
     const isValid = isBalanced && description && rows.every(r => r.account_id);
 
+    // Filter account atribut
+    const pickAccountForJournal = (account: any): JournalAccountRef => {
+        const {
+            id,
+            name,
+            category,
+            group,
+            statement,
+        } = account
+
+        return {
+            id,
+            name,
+            category,
+            group,
+            statement,
+        }
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isValid) return;
 
-        setSubmitting(true);
-        setMessage(null);
-
-        // Find account names
-        const findAccountName = (id: string) => accounts.find(a => a.id === id)?.name || "Unknown Account";
+        // siapkan payload, tapi JANGAN kirim dulu
+        const findAccount = (id: string) =>
+            accounts.find(a => a.id === id) || { id: "unknown", name: "Unknown" };
 
         const payload = {
             date,
             description,
             period: date.substring(0, 7) + "-01",
             entries: rows.map(r => ({
-                account_id: r.account_id,
-                name: findAccountName(r.account_id), // Include Account Name
+                account: pickAccountForJournal(findAccount(r.account_id)),
                 debit: r.debit,
                 credit: r.credit
             }))
         };
 
+        setPendingPayload(payload);
+        setShowPinModal(true);
+    };
+
+    const submitWithPin = async () => {
+        if (!pin || pin.length < 4) {
+            setMessage({ type: 'error', text: 'PIN tidak valid' });
+            return;
+        }
+
+        setSubmitting(true);
+        setMessage(null);
+
         try {
             const res = await fetch('/api/journal', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({
+                    ...pendingPayload,
+                    pass: pin
+                })
             });
 
             const data = await res.json();
 
             if (!res.ok) {
-                throw new Error(data.error || "Gagal menyimpan jurnal");
+                throw new Error(data.error || 'Gagal menyimpan jurnal');
             }
 
-            setMessage({ type: 'success', text: "Jurnal berhasil disimpan!" });
-            // Reset form
+            setMessage({ type: 'success', text: 'Jurnal berhasil disimpan!' });
+
+            // reset state sensitif
+            setPin('');
+            setPendingPayload(null);
+            setShowPinModal(false);
+
             setRows([
                 { account_id: '', debit: 0, credit: 0 },
-                { account_id: '', debit: 0, credit: 0 },
+                { account_id: '', debit: 0, credit: 0 }
             ]);
             setDescription('');
+
         } catch (err: any) {
             setMessage({ type: 'error', text: err.message });
         } finally {
             setSubmitting(false);
+            setPin('');
         }
     };
+
+
 
     return (
         <div className="min-h-screen bg-[#0f0f12] p-4 md:p-8">
@@ -344,7 +390,7 @@ export default function JournalPage() {
                                     <button
                                         type="submit"
                                         disabled={submitting || !isValid}
-                                        className="bg-blue-600 hover:bg-blue-500 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg font-medium shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2"
+                                        className="bg-blue-600 hover:bg-blue-500 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg font-medium shadow-lg transition-all flex items-center gap-2"
                                     >
                                         {submitting ? 'Menyimpan...' : (
                                             <>
@@ -359,6 +405,51 @@ export default function JournalPage() {
                     </div>
                 </div>
             </div>
+            {showPinModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+                    <div className="bg-[#1a1a1f] w-full max-w-sm rounded-xl border border-[#2a2a2f] p-6 shadow-2xl">
+                        <h3 className="text-lg font-semibold text-white mb-2">
+                            Konfirmasi PIN
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-4">
+                            Masukkan PIN untuk menyimpan jurnal
+                        </p>
+
+                        <input
+                            type="password"
+                            inputMode="numeric"
+                            maxLength={6}
+                            value={pin}
+                            onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
+                            className="w-full bg-[#0f0f12] border border-[#2a2a2f] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500"
+                            autoFocus
+                        />
+
+                        <div className="flex justify-end gap-3 mt-6">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setShowPinModal(false);
+                                    setPin('');
+                                }}
+                                className="px-4 py-2 text-sm text-gray-400 hover:text-white"
+                            >
+                                Batal
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={submitWithPin}
+                                disabled={submitting}
+                                className="bg-blue-600 hover:bg-blue-500 disabled:bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-medium"
+                            >
+                                {submitting ? 'Memproses...' : 'Konfirmasi'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
+
     );
 }
