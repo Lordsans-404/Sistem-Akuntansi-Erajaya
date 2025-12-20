@@ -10,7 +10,6 @@ interface LedgerRow {
     id: string; // Journal ID
     date: string;
     description: string;
-    ref?: string; // Reference number
     debit: number;
     credit: number;
     balance: number;
@@ -20,6 +19,7 @@ interface AccountOption {
     id: string;
     name: string;
     code?: string;
+    category?: string;
 }
 
 export default function GeneralLedgerPage() {
@@ -127,7 +127,6 @@ export default function GeneralLedgerPage() {
                 id: journal.id || '',
                 date: journal.date,
                 description: journal.description,
-                ref: journal.id?.substring(0, 6).toUpperCase(),
                 debit: deb,
                 credit: cred,
                 balance: runningBalance
@@ -190,7 +189,7 @@ export default function GeneralLedgerPage() {
                         <div className="md:col-span-1">
                             <label className="block text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
                                 <Book size={16} />
-                                Pilih Tampilan
+                                Pilih Akun
                             </label>
                             <select
                                 value={selectedAccountId}
@@ -198,7 +197,6 @@ export default function GeneralLedgerPage() {
                                 className="w-full p-3 border-2 border-[#2a2a2f] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#00bcd4] focus:border-transparent bg-[#2a2a2f] text-gray-200"
                             >
                                 <option value="ALL">Semua Akun (Jurnal Umum)</option>
-                                <option disabled>────────────────</option>
                                 {accounts.map((acc) => (
                                     <option key={acc.id} value={acc.id}>
                                         {acc.code ? `${acc.code} - ` : ''}{acc.name}
@@ -277,8 +275,8 @@ export default function GeneralLedgerPage() {
                         <table className="w-full text-left text-sm text-gray-300">
                             <thead className="bg-[#25252b] text-xs uppercase font-semibold text-gray-400">
                                 <tr>
+                                    <th className="px-6 py-4">ID</th>
                                     <th className="px-6 py-4">Tanggal</th>
-                                    <th className="px-6 py-4">No. Ref</th>
                                     <th className="px-6 py-4">Keterangan</th>
                                     {selectedAccountId === 'ALL' ? (
                                         <th className="px-6 py-4">Akun</th>
@@ -306,65 +304,120 @@ export default function GeneralLedgerPage() {
                                     </tr>
                                 ) : (
                                     // Conditional Rendering Body
+                                    // Conditional Rendering Body
                                     selectedAccountId === 'ALL' ? (
                                         // View: ALL ACCOUNTS (JURNAL UMUM)
-                                        journals.map((journal) => (
-                                            <React.Fragment key={journal.id}>
-                                                {/* Transaction Header Row (Date/Ref included) or First Entry Row */}
-                                                {journal.entries.map((entry, idx) => {
-                                                    const isFirst = idx === 0;
-                                                    const accName = getAccountName(entry.account?.id || entry.account);
-                                                    return (
-                                                        <tr key={`${journal.id}-${idx}`} className={`hover:bg-[#2a2a2f]/30 transition-colors ${isFirst ? 'border-t border-[#3a3a3f]' : ''}`}>
-                                                            <td className="px-6 py-3 whitespace-nowrap align-top text-gray-400">
-                                                                {isFirst ? new Date(journal.date).toLocaleDateString('id-ID') : ''}
-                                                            </td>
-                                                            <td className="px-6 py-3 font-mono text-xs text-blue-400 align-top">
-                                                                {isFirst ? journal.id?.substring(0, 6).toUpperCase() : ''}
-                                                            </td>
-                                                            <td className="px-6 py-3 align-top text-gray-300">
-                                                                {isFirst ? journal.description : ''}
-                                                            </td>
-                                                            <td className="px-6 py-3 font-medium text-white">
-                                                                <div className={`${Number(entry.credit) > 0 ? 'pl-8' : ''}`}>
-                                                                    {accName}
-                                                                </div>
-                                                            </td>
-                                                            <td className="px-6 py-3 text-right font-mono text-gray-300">
-                                                                {Number(entry.debit) > 0 ? formatMoney(Number(entry.debit)) : '-'}
-                                                            </td>
-                                                            <td className="px-6 py-3 text-right font-mono text-gray-300">
-                                                                {Number(entry.credit) > 0 ? formatMoney(Number(entry.credit)) : '-'}
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                })}
-                                            </React.Fragment>
-                                        ))
+                                        (() => {
+                                            let globalRowIndex = 0;
+                                            const getCategoryChar = (category: string) => {
+                                                switch (category?.toLowerCase()) {
+                                                    case 'asset': return 'A';
+                                                    case 'expense': return 'B';
+                                                    case 'liability': return 'L';
+                                                    case 'revenue': return 'P';
+                                                    case 'equity': return 'E';
+                                                    default: return '?';
+                                                }
+                                            };
+
+                                            return journals.map((journal) => (
+                                                <React.Fragment key={journal.id}>
+                                                    {/* Transaction Header Row (Date/Ref included) or First Entry Row */}
+                                                    {journal.entries.map((entry, idx) => {
+                                                        globalRowIndex++;
+                                                        const isFirst = idx === 0;
+                                                        const accName = getAccountName(entry.account?.id || entry.account);
+
+                                                        // Determine category
+                                                        // journal.entries[idx].account object usually has category if populated, but let's check.
+                                                        // On Jurnal page we saw entry.account has category.
+                                                        // But here we might check if entry.account is object or ID.
+                                                        // If ID, we look up in accounts list.
+                                                        let category = '';
+                                                        if (typeof entry.account === 'object' && entry.account?.category) {
+                                                            category = entry.account.category;
+                                                        } else {
+                                                            const accId = typeof entry.account === 'string' ? entry.account : entry.account?.id;
+                                                            const acc = accounts.find(a => a.id === accId);
+                                                            category = acc?.category || '';
+                                                        }
+
+                                                        const categoryChar = getCategoryChar(category);
+                                                        const customId = `${categoryChar}-${String(globalRowIndex).padStart(3, '0')}`;
+
+                                                        return (
+                                                            <tr key={`${journal.id}-${idx}`} className={`hover:bg-[#2a2a2f]/30 transition-colors ${isFirst ? 'border-t border-[#3a3a3f]' : ''}`}>
+                                                                <td className="px-6 py-3 whitespace-nowrap align-top text-gray-500 font-mono text-xs">
+                                                                    {customId}
+                                                                </td>
+                                                                <td className="px-6 py-3 whitespace-nowrap align-top text-gray-400">
+                                                                    {isFirst ? new Date(journal.date).toLocaleDateString('id-ID') : ''}
+                                                                </td>
+                                                                <td className="px-6 py-3 align-top text-gray-300">
+                                                                    {isFirst ? journal.description : ''}
+                                                                </td>
+                                                                <td className="px-6 py-3 font-medium text-white">
+                                                                    <div className={`${Number(entry.credit) > 0 ? 'pl-8' : ''}`}>
+                                                                        {accName}
+                                                                    </div>
+                                                                </td>
+                                                                <td className="px-6 py-3 text-right font-mono text-gray-300">
+                                                                    {Number(entry.debit) > 0 ? formatMoney(Number(entry.debit)) : '-'}
+                                                                </td>
+                                                                <td className="px-6 py-3 text-right font-mono text-gray-300">
+                                                                    {Number(entry.credit) > 0 ? formatMoney(Number(entry.credit)) : '-'}
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    })}
+                                                </React.Fragment>
+                                            ))
+                                        })()
                                     ) : (
                                         // View: SPECIFIC ACCOUNT (BUKU BESAR)
-                                        ledgerData.map((row) => (
-                                            <tr key={row.id + row.date} className="hover:bg-[#2a2a2f]/30 transition-colors">
-                                                <td className="px-6 py-4 whitespace-nowrap">
-                                                    {new Date(row.date).toLocaleDateString('id-ID')}
-                                                </td>
-                                                <td className="px-6 py-4 font-mono text-xs text-blue-400">
-                                                    {row.ref}
-                                                </td>
-                                                <td className="px-6 py-4">
-                                                    {row.description}
-                                                </td>
-                                                <td className="px-6 py-4 text-right font-mono text-gray-300">
-                                                    {row.debit > 0 ? formatMoney(row.debit) : '-'}
-                                                </td>
-                                                <td className="px-6 py-4 text-right font-mono text-gray-300">
-                                                    {row.credit > 0 ? formatMoney(row.credit) : '-'}
-                                                </td>
-                                                <td className="px-6 py-4 text-right font-bold text-white font-mono">
-                                                    {row.balance < 0 ? `(${formatMoney(row.balance)})` : formatMoney(row.balance)}
-                                                </td>
-                                            </tr>
-                                        ))
+                                        (() => {
+                                            const getCategoryChar = (category: string) => {
+                                                switch (category?.toLowerCase()) {
+                                                    case 'asset': return 'A';
+                                                    case 'expense': return 'B';
+                                                    case 'liability': return 'L';
+                                                    case 'revenue': return 'P';
+                                                    case 'equity': return 'E';
+                                                    default: return '?';
+                                                }
+                                            };
+
+                                            // Get category from the selected account
+                                            const selectedAccount = accounts.find(a => a.id === selectedAccountId);
+                                            const categoryChar = getCategoryChar(selectedAccount?.category || '');
+
+                                            return ledgerData.map((row, index) => {
+                                                const customId = `${categoryChar}-${String(index + 1).padStart(3, '0')}`;
+
+                                                return (
+                                                    <tr key={row.id + row.date} className="hover:bg-[#2a2a2f]/30 transition-colors">
+                                                        <td className="px-6 py-4 whitespace-nowrap text-gray-500 font-mono text-xs">
+                                                            {customId}
+                                                        </td>
+                                                        <td className="px-6 py-4 whitespace-nowrap">
+                                                            {new Date(row.date).toLocaleDateString('id-ID')}
+                                                        </td>
+                                                        <td className="px-6 py-4">
+                                                            {row.description}
+                                                        </td>
+                                                        <td className="px-6 py-4 text-right font-mono text-gray-300">
+                                                            {row.debit > 0 ? formatMoney(row.debit) : '-'}
+                                                        </td>
+                                                        <td className="px-6 py-4 text-right font-mono text-gray-300">
+                                                            {row.credit > 0 ? formatMoney(row.credit) : '-'}
+                                                        </td>
+                                                        <td className="px-6 py-4 text-right font-bold text-white font-mono">
+                                                            {row.balance < 0 ? `(${formatMoney(row.balance)})` : formatMoney(row.balance)}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })
+                                        })()
                                     )
                                 )}
                             </tbody>

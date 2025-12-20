@@ -155,55 +155,79 @@ export default function JournalListPage() {
 
                     {!loading && !error && journals.length > 0 && (
                         <div className="divide-y divide-[#2a2a2f]">
-                            {journals.map((journal) => (
-                                <div key={journal.id} className="p-6 hover:bg-[#2a2a2f]/30 transition-colors group">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div>
-                                            <div className="flex items-center gap-3 mb-1">
-                                                <span className="font-bold text-lg text-white">{formatDate(journal.date)}</span>
-                                                <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                                                    #{journal.id?.substring(0, 6)}
-                                                </span>
-                                            </div>
-                                            <p className="text-gray-400 text-sm"><b>Deskripsi Transaksi </b>: {journal.description}</p>
-                                        </div>
-                                        <div className="text-right">
-                                            <span className="block text-xl font-bold text-white tracking-tight">
-                                                {formatMoney(journal.total_debit)}
-                                            </span>
-                                            <span className="text-xs text-gray-500 uppercase tracking-wider">Total Nilai</span>
-                                        </div>
-                                    </div>
+                            {(() => {
+                                let globalRowIndex = 0;
+                                const getCategoryChar = (category: string) => {
+                                    switch (category?.toLowerCase()) {
+                                        case 'asset': return 'A';
+                                        case 'expense': return 'B';
+                                        case 'liability': return 'L';
+                                        case 'revenue': return 'P';
+                                        case 'equity': return 'E';
+                                        default: return '?';
+                                    }
+                                };
 
-                                    {/* Detail Entries Preview */}
-                                    <div className="bg-[#0f0f12] rounded-lg border border-[#2a2a2f]/50 p-3 text-sm">
-                                        <table className="w-full">
-                                            <thead>
-                                                <tr>
-                                                    <th className="text-left text-gray-500 font-normal pb-2 w-[50%]">Akun</th>
-                                                    <th className="text-right text-gray-500 font-normal pb-2 w-[25%]">Debit</th>
-                                                    <th className="text-right text-gray-500 font-normal pb-2 w-[25%]">Kredit</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {journal.entries.map((entry, idx) => (
-                                                    <tr key={idx} className="border-t border-[#2a2a2f]/50">
-                                                        <td className="py-1.5 text-gray-300 pl-2 border-l-2 border-transparent hover:border-blue-500 transition-colors">
-                                                            {entry.account.name}
-                                                        </td>
-                                                        <td className="py-1.5 text-right text-gray-400 font-mono">
-                                                            {entry.debit > 0 ? formatMoney(entry.debit) : '-'}
-                                                        </td>
-                                                        <td className="py-1.5 text-right text-gray-400 font-mono">
-                                                            {entry.credit > 0 ? formatMoney(entry.credit) : '-'}
-                                                        </td>
+                                return journals.map((journal) => (
+                                    <div key={journal.id} className="p-6 hover:bg-[#2a2a2f]/30 transition-colors group">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <div>
+                                                <div className="flex items-center gap-3 mb-1">
+                                                    <span className="font-bold text-lg text-white">{formatDate(journal.date)}</span>
+                                                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                                                        #{journal.id?.substring(0, 6)}
+                                                    </span>
+                                                </div>
+                                                <p className="text-gray-400 text-sm"><b>Deskripsi Transaksi </b>: {journal.description}</p>
+                                            </div>
+                                            <div className="text-right">
+                                                <span className="block text-xl font-bold text-white tracking-tight">
+                                                    {formatMoney(journal.total_debit)}
+                                                </span>
+                                                <span className="text-xs text-gray-500 uppercase tracking-wider">Total Nilai</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Detail Entries Preview */}
+                                        <div className="bg-[#0f0f12] rounded-lg border border-[#2a2a2f]/50 p-3 text-sm">
+                                            <table className="w-full">
+                                                <thead>
+                                                    <tr>
+                                                        <th className="text-left text-gray-500 font-normal pb-2 w-[10%]">ID</th>
+                                                        <th className="text-left text-gray-500 font-normal pb-2 w-[40%]">Akun</th>
+                                                        <th className="text-right text-gray-500 font-normal pb-2 w-[25%]">Debit</th>
+                                                        <th className="text-right text-gray-500 font-normal pb-2 w-[25%]">Kredit</th>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
+                                                </thead>
+                                                <tbody>
+                                                    {journal.entries.map((entry, idx) => {
+                                                        globalRowIndex++;
+                                                        const categoryChar = getCategoryChar(entry.account.category);
+                                                        const customId = `${categoryChar}-${String(globalRowIndex).padStart(3, '0')}`;
+
+                                                        return (
+                                                            <tr key={idx} className="border-t border-[#2a2a2f]/50">
+                                                                <td className="py-1.5 text-gray-500 font-mono text-xs">
+                                                                    {customId}
+                                                                </td>
+                                                                <td className="py-1.5 text-gray-300 pl-2 border-l-2 border-transparent hover:border-blue-500 transition-colors">
+                                                                    {entry.account.name}
+                                                                </td>
+                                                                <td className="py-1.5 text-right text-gray-400 font-mono">
+                                                                    {entry.debit > 0 ? formatMoney(entry.debit) : '-'}
+                                                                </td>
+                                                                <td className="py-1.5 text-right text-gray-400 font-mono">
+                                                                    {entry.credit > 0 ? formatMoney(entry.credit) : '-'}
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            })()}
                         </div>
                     )}
                 </div>
