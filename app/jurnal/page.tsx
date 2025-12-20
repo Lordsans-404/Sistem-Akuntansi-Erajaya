@@ -80,12 +80,6 @@ export default function JournalListPage() {
 
                     <div className='flex flex-row gap-2'>
                         <a
-                            href="/tutup-buku"
-                            className="bg-orange-600 hover:bg-orange-500 text-white px-6 py-2.5 rounded-xl font-medium shadow-lg shadow-orange-500/20 transition-all flex items-center group"
-                        >
-                            Tutup Buku
-                        </a>
-                        <a
                             href="/jurnal/create"
                             className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2 group"
                         >
