@@ -4,6 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, Save, FileText, Calendar, AlertCircle, CheckCircle2 } from 'lucide-react';
 import Navbar from '@/components/layout/navbar';
 import { AccountData, JournalAccountRef } from '@/types/index';
+import {
+    collection,
+    getDocs,
+    query,
+    where
+} from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const PERIOD_CODE = "2025-09-30"; // Default or dynamic? User prompt implied 2025-09-30
 
@@ -44,18 +51,34 @@ export default function JournalPage() {
     useEffect(() => {
         const fetchAllAccounts = async () => {
             setLoadingAccounts(true);
+
             try {
-                const promises = accountTypes.map(type =>
-                    fetch(`/api/accounts/${type.value}`).then(res => res.ok ? res.json() : [])
-                );
+                const promises = accountTypes.map(async (type) => {
+                    const q = query(
+                        collection(db, "journal_accounts"),
+                        where("category", "==", type.value),
+                        where("is_active", "==", true)
+                    );
+
+                    const snapshot = await getDocs(q);
+
+                    return snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    })) as AccountData[];
+                });
+
                 const results = await Promise.all(promises);
                 const flatAccounts = results.flat();
-                // Sort by name or code if available
-                flatAccounts.sort((a: AccountData, b: AccountData) => a.name.localeCompare(b.name));
+
+                flatAccounts.sort((a, b) =>
+                    a.name.localeCompare(b.name)
+                );
+
                 setAccounts(flatAccounts);
             } catch (err) {
-                console.error("Failed to fetch accounts", err);
-                setMessage({ type: 'error', text: "Gagal memuat data akun." });
+                console.error(err);
+                setMessage({ type: "error", text: "Gagal memuat data akun." });
             } finally {
                 setLoadingAccounts(false);
             }

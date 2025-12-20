@@ -13,6 +13,8 @@ export default function JournalListPage() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [error, setError] = useState('');
+    const [scrolled, setScrolled] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const fetchJournals = async () => {
         setLoading(true);
@@ -60,7 +62,7 @@ export default function JournalListPage() {
 
     return (
         <div className="min-h-screen bg-[#0f0f12] p-4 md:p-8">
-            <Navbar scrolled={false} mobileMenuOpen={false} setMobileMenuOpen={() => { }} />
+            <Navbar scrolled={scrolled} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
 
             <div className="max-w-7xl mt-20 mx-auto">
 
@@ -76,13 +78,22 @@ export default function JournalListPage() {
                         </p>
                     </div>
 
-                    <a
-                        href="/journal/create"
-                        className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2 group"
-                    >
-                        Buat Jurnal Baru
-                        <ArrowRight size={16} className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all" />
-                    </a>
+                    <div className='flex flex-row gap-2'>
+                        <a
+                            href="/tutup-buku"
+                            className="bg-orange-600 hover:bg-orange-500 text-white px-6 py-2.5 rounded-xl font-medium shadow-lg shadow-orange-500/20 transition-all flex items-center group"
+                        >
+                            Tutup Buku
+                        </a>
+                        <a
+                            href="/jurnal/create"
+                            className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-medium shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2 group"
+                        >
+                            Buat Jurnal Baru
+                            <ArrowRight size={16} className="opacity-0 -ml-2 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                        </a>
+                    </div>
+
                 </div>
 
                 {/* Filter Section */}

@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <nav
       className={`
-        fixed top-0 left-0 right-0 z-50 transition-all duration-300 
+        fixed top-0 left-0 right-0 z-50 transition-all duration-300
         ${scrolled
           ? 'bg-[rgba(15,15,18,0.6)] backdrop-blur-xl'
           : 'bg-[rgba(10,10,12,0.3)] backdrop-blur-lg'
@@ -74,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({
             <img
               src="/logo-nav.png"
               alt="Erajaya Logo"
-              className="h-15 w-auto object-contain select-none"
+              className="h-10 w-auto object-contain select-none"
             />
           </a>
 
@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({
           <div className="hidden md:flex items-center space-x-8">
             {/* Jurnal Umum */}
             <a
-              href="/journal"
+              href="/jurnal"
               className="
                 hover:text-[#00bcd4]
                 text-gray-300
@@ -91,6 +91,19 @@ const Navbar: React.FC<NavbarProps> = ({
               "
             >
               Jurnal Umum
+            </a>
+
+            {/* Buku Besar */}
+            <a
+              href="/buku-besar"
+              className="
+                hover:text-[#00bcd4]
+                text-gray-300
+                transition-all duration-200
+                hover:drop-shadow-[0_0_6px_#00bcd4]
+              "
+            >
+              Buku Besar
             </a>
 
             {/* Dropdown Akun Aset */}
@@ -105,7 +118,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   hover:drop-shadow-[0_0_6px_#00bcd4]
                 "
               >
-                <span>COA</span>
+                <span>Elemen Laporan</span>
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${asetDropdownOpen ? 'rotate-180' : ''
                     }`}
@@ -174,7 +187,7 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* Tombol toggle menu mobile */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-gray-300"
+            className="md:hidden text-gray-300 p-2 rounded-md hover:bg-white/10 transition-colors"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X /> : <Menu />}
@@ -188,12 +201,18 @@ const Navbar: React.FC<NavbarProps> = ({
           <div className="px-4 py-4 space-y-3">
             {/* Jurnal Umum - Mobile */}
             <a
-              href="/jurnal-umum"
+              href="/jurnal"
               className="block text-gray-300 hover:text-[#00bcd4] transition-colors duration-200"
             >
               Jurnal Umum
             </a>
-
+            {/* Buku Besar - Mobile */}
+            <a
+              href="/buku-besar"
+              className="block text-gray-300 hover:text-[#00bcd4] transition-colors duration-200"
+            >
+              Buku Besar
+            </a>
             {/* Dropdown Akun Aset - Mobile */}
             <div>
               <button
@@ -212,7 +231,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   {akunItems.map((item, idx) => (
                     <a
                       key={idx}
-                      href={`/akun-aset/${item.href}`}
+                      href={item.href}
                       className="block text-gray-400 hover:text-[#00bcd4] transition-colors duration-200 text-sm"
                     >
                       {item.label}
@@ -250,8 +269,9 @@ const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
         </div>
-      )}
-    </nav>
+      )
+      }
+    </nav >
   );
 };
 

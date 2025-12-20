@@ -5,6 +5,7 @@ import { Target, Package, Smartphone, Eye, Zap, Users, MessageCircle, TrendingUp
 
 import Navbar from '@/components/layout/navbar'; // Navbar layout global
 import Footer from '@/components/layout/footer'; // Footer layout global
+import FinancialCharts from '@/components/about/financial-charts';
 
 interface AnimatedCounterProps {
   end: any;
@@ -39,18 +40,18 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ end, duration = 2000,
   useEffect(() => {
     if (!isVisible) return;
 
-		let startTime: number;
-		let animationFrame: number | null = null;
+    let startTime: number;
+    let animationFrame: number | null = null;
 
-    const animate = (timestamp:any) => {
+    const animate = (timestamp: any) => {
       if (!startTime) startTime = timestamp;
       const progress = timestamp - startTime;
       const percentage = Math.min(progress / duration, 1);
-      
+
       // Easing function untuk efek smooth
       const easeOutQuart = 1 - Math.pow(1 - percentage, 4);
       const current = Math.floor(end * easeOutQuart);
-      
+
       setCount(current);
 
       if (percentage < 1) {
@@ -76,13 +77,13 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ end, duration = 2000,
 
 const AboutPage = () => {
   const stats = [
-    { number: "28", label: "Tahun Berpengalaman",suffix:"+" },
+    { number: "28", label: "Tahun Berpengalaman", suffix: "+" },
     { number: "42", label: "Pusat Distribusi" },
     { number: "2099", label: "Gerai Retail" },
-    { number: "54000", label: "Outlet Mitra",suffix:"+" }
+    { number: "54000", label: "Outlet Mitra", suffix: "+" }
   ];
-	const [scrolled, setScrolled] = useState<boolean>(false); // Menandai apakah halaman sudah discroll (ubah style navbar)
-	const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false); // Menandai apakah menu mobile sedang terbuka
+  const [scrolled, setScrolled] = useState<boolean>(false); // Menandai apakah halaman sudah discroll (ubah style navbar)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false); // Menandai apakah menu mobile sedang terbuka
 
   const cards = [
     {
@@ -129,15 +130,15 @@ const AboutPage = () => {
   return (
 
     <div className='bg-[#0f0f12] text-white font-sans'>
-			<Navbar
-				scrolled={scrolled}
-				mobileMenuOpen={mobileMenuOpen}
-				setMobileMenuOpen={setMobileMenuOpen}
-			/>
+      <Navbar
+        scrolled={scrolled}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden mt-16 bg-[url('/banner-2.png')] bg-cover bg-top bg-no-repeat border-b border-[#2a2a2f]">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#00bcd4] opacity-10 blur-[150px] rounded-full"></div>
-        
+
         <div className="relative max-w-7xl mx-auto px-6 py-32">
           <div className="text-center space-y-8">
             <h1 className="text-6xl h-20 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00bcd4] to-[#00e5ff]">
@@ -146,35 +147,35 @@ const AboutPage = () => {
             <p className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
               Distributor dan retailer terkemuka perangkat telekomunikasi seluler di Indonesia sejak 1996, berkomitmen menghadirkan produk berkualitas dan layanan terpercaya untuk meningkatkan kualitas hidup masyarakat
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-16 pt-12">
-							{stats.map((stat, i) => (
-								<div 
-									key={i} 
-									className="text-center transform transition-all duration-500 hover:scale-110"
-									style={{
-										animation: `fadeInUp 0.8s ease-out ${i * 0.2}s both`
-									}}
-								>
-									<div className="text-5xl font-extrabold text-[#00bcd4] mb-2 relative">
-										<AnimatedCounter 
-											end={stat.number} 
-											duration={2500}
-											suffix={stat.suffix}
-										/>
-										<div 
-											className="absolute inset-0 blur-xl opacity-30 bg-[#00bcd4]"
-											style={{
-												animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
-											}}
-										/>
-									</div>
-									<div className="text-sm text-gray-500 uppercase tracking-widest">
-										{stat.label}
-									</div>
-								</div>
-							))}
-						</div>
+              {stats.map((stat, i) => (
+                <div
+                  key={i}
+                  className="text-center transform transition-all duration-500 hover:scale-110"
+                  style={{
+                    animation: `fadeInUp 0.8s ease-out ${i * 0.2}s both`
+                  }}
+                >
+                  <div className="text-5xl font-extrabold text-[#00bcd4] mb-2 relative">
+                    <AnimatedCounter
+                      end={stat.number}
+                      duration={2500}
+                      suffix={stat.suffix}
+                    />
+                    <div
+                      className="absolute inset-0 blur-xl opacity-30 bg-[#00bcd4]"
+                      style={{
+                        animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                      }}
+                    />
+                  </div>
+                  <div className="text-sm text-gray-500 uppercase tracking-widest">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -189,11 +190,11 @@ const AboutPage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {cards.map((card, i) => (
               <div key={i} className="group relative bg-[#1a1a1f] border border-[#2a2a2f] rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 hover:border-[#00bcd4] hover:shadow-[0_20px_60px_rgba(0,188,212,0.3)]">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#00bcd4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
-                
+
                 <div className="relative z-10">
                   <div className="w-16 h-16 bg-[#00bcd4]/10 rounded-xl flex items-center justify-center mb-6 text-[#00bcd4] transition-all duration-500 group-hover:bg-[#00bcd4]/20 group-hover:shadow-[0_0_30px_rgba(0,188,212,0.6)]">
                     {card.icon}
@@ -204,6 +205,16 @@ const AboutPage = () => {
               </div>
             ))}
           </div>
+
+          {/* Financial Highlights */}
+          <div className="mt-24">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-extrabold text-white mb-4">Kinerja Keuangan</h2>
+              <p className="text-gray-400">Ringkasan performa keuangan dan pertumbuhan perusahaan</p>
+            </div>
+            <FinancialCharts />
+          </div>
+
         </div>
       </section>
 
@@ -217,7 +228,7 @@ const AboutPage = () => {
           <div className="grid lg:grid-cols-2 gap-8">
             <div className="group relative bg-[#1a1a1f] border border-[#2a2a2f] rounded-xl p-12 transition-all duration-500 hover:border-[#00bcd4] hover:shadow-[0_25px_70px_rgba(0,188,212,0.3)] overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#00bcd4] opacity-5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
-              
+
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-[#00bcd4]/15 rounded-xl flex items-center justify-center">
@@ -233,7 +244,7 @@ const AboutPage = () => {
 
             <div className="group relative bg-[#1a1a1f] border border-[#2a2a2f] rounded-xl p-12 transition-all duration-500 hover:border-[#00bcd4] hover:shadow-[0_25px_70px_rgba(0,188,212,0.3)] overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#00bcd4] opacity-5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
-              
+
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-14 h-14 bg-[#00bcd4]/15 rounded-xl flex items-center justify-center">
@@ -285,7 +296,7 @@ const AboutPage = () => {
             {milestones.map((m, i) => (
               <div key={i} className="relative pl-10">
                 <div className="absolute left-[-52px] top-2 w-4 h-4 bg-[#00bcd4] rounded-full shadow-[0_0_20px_rgba(0,188,212,0.8)]"></div>
-                
+
                 <div className="text-3xl font-extrabold text-[#00bcd4] mb-2">{m.year}</div>
                 <h4 className="text-2xl font-bold text-white mb-3">{m.title}</h4>
                 <p className="text-gray-400 leading-relaxed">{m.desc}</p>

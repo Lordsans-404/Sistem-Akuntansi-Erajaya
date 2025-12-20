@@ -15,10 +15,7 @@ serviceKey.json
 /coverage
 
 # Unnecessary
-periods.json
-accounts.json
-reports.json
-seedAccount.js
+/inject-functions
 
 # next.js
 /.next/
@@ -27,6 +24,7 @@ seedAccount.js
 # production
 /build
 
+/inject-function
 # misc
 .DS_Store
 *.pem

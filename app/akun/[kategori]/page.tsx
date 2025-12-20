@@ -15,11 +15,11 @@ export const accountTypes = [
   { value: 'equity', label: 'Ekuitas', icon: '📈' },
 ];
 const ExpenseAccountsDisplay = () => {
-	const { kategori } = useParams() as { kategori: string };
+  const { kategori } = useParams() as { kategori: string };
 
   const [accounts, setAccounts] = useState<AccountData[]>([]);
   const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(String);
+  const [error, setError] = useState(String);
 
   const [scrolled, setScrolled] = useState<boolean>(false); // Menandai apakah halaman sudah discroll (ubah style navbar)
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false); // Menandai apakah menu mobile sedang terbuka
@@ -64,12 +64,12 @@ const ExpenseAccountsDisplay = () => {
     }).format(val);
 
 
-  const convertSlug = (slug:string) => {
-    return slug.split("_").map((s)=>s.charAt(0).toUpperCase() + s.slice(1)).join(" ");
+  const convertSlug = (slug: string) => {
+    return slug.split("_").map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(" ");
   };
 
   // Group accounts by their group field
-  const groupedAccounts : Record<string, AccountData[]> = accounts.reduce((acc:any, account) => {
+  const groupedAccounts: Record<string, AccountData[]> = accounts.reduce((acc: any, account) => {
     const group = account.group || 'Lainnya';
     if (!acc[group]) {
       acc[group] = [];
@@ -79,48 +79,47 @@ const ExpenseAccountsDisplay = () => {
   }, {});
 
   // Calculate totals per group
-  const calculateGroupTotal = (groupAccounts:any, period:any) => {
+  const calculateGroupTotal = (groupAccounts: any, period: any) => {
     return groupAccounts.reduce(
-      (sum:any, acc:any) => sum + (acc?.balances?.[period] || 0),
+      (sum: any, acc: any) => sum + (acc?.balances?.[period] || 0),
       0
     );
   };
 
   return (
     <div className="min-h-screen bg-[#0f0f12] p-4 md:p-8">
-			<Navbar
+      <Navbar
         scrolled={scrolled}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />
       <div className="max-w-7xl mt-16 mx-auto">
-				<div className="bg-[#1a1a1f] rounded-xl shadow-2xl p-6 mb-8 border border-[#2a2a2f]">
-					<div className="flex flex-col">
-						{/* Report Type Selection */}
-						<div>
-							<label className="block text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
-								<FileText size={16} />
-								Pilihan Akun
-							</label>
-							<div className="flex flex-row gap-3">
-								{accountTypes.map((type) => (
-									<a
-										key={type.value}
-										href={`/akun/${type.value}`}
-										className={`p-3 rounded-lg text-left flex-1 transition-all duration-300 flex items-center gap-3 ${
-											kategori === type.value
-												? 'bg-gradient-to-r from-[#ef4444] to-[#f87171]'
-												: 'bg-[#2a2a2f] text-gray-300 hover:bg-[#3a3a3f] border border-[#3a3a3f]'
-										}`}
-									>
-										<span className="text-xl">{type.icon}</span>
-										<span className="text-sm font-medium">{type.label}</span>
-									</a>
-								))}
-							</div>
-						</div>
-					</div>
-				</div>
+        <div className="bg-[#1a1a1f] rounded-xl shadow-2xl p-6 mb-8 border border-[#2a2a2f]">
+          <div className="flex flex-col">
+            {/* Report Type Selection */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
+                <FileText size={16} />
+                Pilihan Akun
+              </label>
+              <div className="flex flex-row flex-wrap gap-3">
+                {accountTypes.map((type) => (
+                  <a
+                    key={type.value}
+                    href={`/akun/${type.value}`}
+                    className={`p-3 rounded-lg text-left flex-1 transition-all duration-300 flex items-center gap-3 ${kategori === type.value
+                      ? 'bg-gradient-to-r from-[#ef4444] to-[#f87171]'
+                      : 'bg-[#2a2a2f] text-gray-300 hover:bg-[#3a3a3f] border border-[#3a3a3f]'
+                      }`}
+                  >
+                    <span className="text-xl">{type.icon}</span>
+                    <span className="text-sm font-medium">{type.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Header */}
         <div className="bg-[#1a1a1f] rounded-xl shadow-2xl border border-[#2a2a2f] overflow-hidden">
           <div className="bg-gradient-to-r from-[#ef4444] to-[#f87171] text-white p-6">
@@ -143,14 +142,14 @@ const ExpenseAccountsDisplay = () => {
               </div>
             )}
 
-						{loading && (
-							<div className="min-h-screen bg-[#0f0f12] flex items-center justify-center">
-								<div className="text-center">
-									<div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#f87171] mx-auto mb-4"></div>
-									<p className="text-[#9ca3af]">Loading data...</p>
-								</div>
-							</div>
-						)}
+            {loading && (
+              <div className="min-h-screen bg-[#0f0f12] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#f87171] mx-auto mb-4"></div>
+                  <p className="text-[#9ca3af]">Loading data...</p>
+                </div>
+              </div>
+            )}
 
             {accounts.length === 0 && !error && (
               <p className="text-[#9ca3af] text-sm">
@@ -196,8 +195,8 @@ const ExpenseAccountsDisplay = () => {
                           </tr>
                         </thead>
                         <tbody>
-													{/* Akun biasa (non-total) */}
-                          {groupAccounts.filter((account) => !account.is_total).map((account:any, idx:number) => {
+                          {/* Akun biasa (non-total) */}
+                          {groupAccounts.filter((account) => !account.is_total).map((account: any, idx: number) => {
                             const balance2025 =
                               account?.balances?.['2025-09-30'] || 0;
                             const balance2024 =
@@ -208,10 +207,9 @@ const ExpenseAccountsDisplay = () => {
                                 key={account.id || `${groupKey}-${idx}`}
                                 className={`
                                   hover:bg-[#2a2a2f]/30 transition-all duration-200
-                                  ${
-                                    idx !== groupAccounts.length - 1
-                                      ? 'border-b border-[#2a2a2f]/30'
-                                      : ''
+                                  ${idx !== groupAccounts.length - 1
+                                    ? 'border-b border-[#2a2a2f]/30'
+                                    : ''
                                   }
                                 `}
                               >
@@ -224,11 +222,10 @@ const ExpenseAccountsDisplay = () => {
                                   </div>
                                 </td>
                                 <td
-                                  className={`py-3 px-4 text-right font-mono whitespace-nowrap ${
-                                    balance2025 < 0
-                                      ? 'text-[#ef4444]'
-                                      : 'text-[#d1d5db]'
-                                  }`}
+                                  className={`py-3 px-4 text-right font-mono whitespace-nowrap ${balance2025 < 0
+                                    ? 'text-[#ef4444]'
+                                    : 'text-[#d1d5db]'
+                                    }`}
                                 >
                                   <div className="flex items-center justify-end gap-2">
                                     {balance2025 > 0 && (
@@ -247,11 +244,10 @@ const ExpenseAccountsDisplay = () => {
                                   </div>
                                 </td>
                                 <td
-                                  className={`py-3 px-4 text-right font-mono whitespace-nowrap ${
-                                    balance2024 < 0
-                                      ? 'text-[#ef4444]'
-                                      : 'text-[#d1d5db]'
-                                  }`}
+                                  className={`py-3 px-4 text-right font-mono whitespace-nowrap ${balance2024 < 0
+                                    ? 'text-[#ef4444]'
+                                    : 'text-[#d1d5db]'
+                                    }`}
                                 >
                                   <div className="flex items-center justify-end gap-2">
                                     {balance2024 > 0 && (
@@ -271,41 +267,39 @@ const ExpenseAccountsDisplay = () => {
                                 </td>
                               </tr>
                             );
-														
+
                           })}
 
-													{/* Jika ada akun total */}
-													{groupAccounts.filter((account) => account.is_total).map((account:any,idx:number) => {
-														const balance2025 =
+                          {/* Jika ada akun total */}
+                          {groupAccounts.filter((account) => account.is_total).map((account: any, idx: number) => {
+                            const balance2025 =
                               account?.balances?.['2025-09-30'] || 0;
                             const balance2024 =
                               account?.balances?.['2024-12-31'] || 0;
-														return(
-															<tr key={account.id || `${groupKey}-${idx}`} className="bg-[#2a2a2f]/50 border-t-2 border-[#f87171]/30">
-																<td className="py-3 px-4 font-bold text-white">
-																	{account.name}
-																</td>
-																<td
-																	className={`py-3 px-4 text-right font-mono font-bold text-lg whitespace-nowrap ${
-																		balance2025 < 0
-																			? 'text-[#ef4444]'
-																			: 'text-[#d1d5db]'
-																	}`}
-																>
-																	{formatMoney(balance2025)}
-																</td>
-																<td
-																	className={`py-3 px-4 text-right font-mono font-bold text-lg whitespace-nowrap ${
-																		balance2024 < 0
-																			? 'text-[#ef4444]'
-																			: 'text-[#d1d5db]'
-																	}`}
-																>
-																	{formatMoney(balance2024)}
-																</td>
-															</tr>
-														);
-													})}
+                            return (
+                              <tr key={account.id || `${groupKey}-${idx}`} className="bg-[#2a2a2f]/50 border-t-2 border-[#f87171]/30">
+                                <td className="py-3 px-4 font-bold text-white">
+                                  {account.name}
+                                </td>
+                                <td
+                                  className={`py-3 px-4 text-right font-mono font-bold text-lg whitespace-nowrap ${balance2025 < 0
+                                    ? 'text-[#ef4444]'
+                                    : 'text-[#d1d5db]'
+                                    }`}
+                                >
+                                  {formatMoney(balance2025)}
+                                </td>
+                                <td
+                                  className={`py-3 px-4 text-right font-mono font-bold text-lg whitespace-nowrap ${balance2024 < 0
+                                    ? 'text-[#ef4444]'
+                                    : 'text-[#d1d5db]'
+                                    }`}
+                                >
+                                  {formatMoney(balance2024)}
+                                </td>
+                              </tr>
+                            );
+                          })}
                         </tbody>
                       </table>
                     </div>
