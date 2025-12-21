@@ -394,7 +394,7 @@ export default function JournalPage() {
                                     onClick={addRow}
                                     className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
                                 >
-                                    <Plus size={16} /> Tamah Baris
+                                    <Plus size={16} /> Tambah Baris
                                 </button>
 
                                 <div className="flex items-center gap-4">

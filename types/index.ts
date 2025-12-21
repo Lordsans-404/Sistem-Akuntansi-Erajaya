@@ -60,7 +60,7 @@ export interface JournalTransaction {
   description: string;
   entries: JournalEntryItem[];
   period: string; // "YYYY-MM-DD" or code
-  status: "draft" | "posted";
+  status: "draft" | "posted" | "closed";
   total_credit: number;
   total_debit: number;
 }
@@ -71,4 +71,5 @@ export interface JournalAccountRef {
   category: string;
   group: string;
   statement: string;
+  report_account_id?: string; // Link to AccountData (Report Account)
 }

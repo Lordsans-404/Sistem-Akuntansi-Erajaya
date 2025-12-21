@@ -14,13 +14,20 @@ import {
     Pie,
     Cell,
 } from 'recharts';
-import { Wallet, TrendingUp, DollarSign, Activity, ArrowRightLeft } from 'lucide-react';
-import { AccountData } from '@/types/index'; // Pastikan path type ini sesuai projectmu
+import { Wallet, TrendingUp, DollarSign, Activity, Calendar } from 'lucide-react';
+import { AccountData } from '@/types/index';
 
 import { db } from '@/lib/firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 
 // --- TIPE DATA ---
+type Period = {
+    id: string;
+    code: string;
+    label: string;
+    endDate: string;
+};
+
 type ConfigItem = {
     title: string;
     icon: React.ReactNode;
@@ -45,23 +52,44 @@ const FinancialCharts = () => {
     const [isShortFormat, setIsShortFormat] = useState(true); // Default ringkas (Triliun)
     const [loading, setLoading] = useState(true);
 
+    // State Period
+    const [periods, setPeriods] = useState<Period[]>([]);
+    const [selectedPeriod, setSelectedPeriod] = useState<Period | null>(null);
+
     // State Data
     const [summaryData, setSummaryData] = useState<SummaryItem[]>([]);
     const [revenueExpenseData, setRevenueExpenseData] = useState<ChartData[]>([]);
     const [expenseCompositionData, setExpenseCompositionData] = useState<ChartData[]>([]);
 
     // --- WARNA CHART ---
-    const PIE_COLORS = {
-        beban_pokok: '#0088FE',    // Biru
-        operasional: '#00C49F',    // Hijau Teal
-        umum: '#FFBB28',           // Kuning
-        keuangan: '#FF8042'        // Oranye
-    };
+
+
+    // --- FETCH PERIODS ---
+    useEffect(() => {
+        const fetchPeriods = async () => {
+            try {
+                const q = query(collection(db, "periods"), orderBy("endDate", "desc"));
+                const snapshot = await getDocs(q);
+                const periodList = snapshot.docs.map(doc => doc.data() as Period);
+
+                if (periodList.length > 0) {
+                    setPeriods(periodList);
+                    // Default to the first (latest) period if none selected
+                    if (!selectedPeriod) {
+                        setSelectedPeriod(periodList[0]);
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching periods:", error);
+            }
+        };
+        fetchPeriods();
+    }, []);
 
     // --- HELPER FORMATTING ---
     const formatCurrency = (value: number) => {
         if (value === 0) return "Rp 0";
-        
+
         if (isShortFormat) {
             // Logic Pembulatan (T/M/Jt)
             if (Math.abs(value) >= 1_000_000_000_000) {
@@ -85,24 +113,20 @@ const FinancialCharts = () => {
 
     // --- MAIN LOGIC: FETCH DATA PARALEL ---
     useEffect(() => {
+        if (!selectedPeriod) return;
+
         const fetchAllData = async () => {
+            setLoading(true);
             try {
                 const colRef = collection(db, "accounts");
+                const currentPeriodKey = selectedPeriod.endDate;
 
                 // QUERY 1: Ambil Data Summary (Total Aset, Ekuitas, dll)
                 // Kita ambil berdasarkan flag 'is_total' == true
                 const qSummary = query(colRef, where("is_total", "==", true));
 
-                // QUERY 2: Ambil Data Chart Laba Rugi (Spesifik ID)
-                const targetChartIds = [
-                    'penjualan_neto',
-                    'beban_pokok_penjualan',
-                    'beban_penjualan_dan_pemasaran',
-                    'beban_umum_dan_administrasi',
-                    'beban_keuangan',
-                    'beban_pajak_penghasilan'
-                ];
-                const qCharts = query(colRef, where("id", "in", targetChartIds));
+                // QUERY 2: Ambil Semua Akun Detail (Bukan Total)
+                const qCharts = query(colRef, where("is_total", "==", false));
 
                 // Jalankan kedua query secara paralel (Promise.all) agar cepat
                 const [snapSummary, snapCharts] = await Promise.all([
@@ -117,7 +141,7 @@ const FinancialCharts = () => {
                 }));
 
                 const targetSummaryIds = ["total_aset", "total_ekuitas", "total_liabilitas", "laba_periode_berjalan"];
-                
+
                 const formattedSummary = targetSummaryIds.map(targetId => {
                     const item = rawSummaryDocs.find(res => res.id === targetId);
                     if (!item) return null;
@@ -130,8 +154,8 @@ const FinancialCharts = () => {
                     };
 
                     const { title, icon, color } = config[targetId] || { title: item.name, icon: <DollarSign />, color: "text-gray-400" };
-                    // Dikali 1000 karena data DB dalam ribuan
-                    const val = (item.balances?.['2025-09-30'] || 0) * 1000;
+                    // Gunakan selectedPeriod untuk akses balances
+                    const val = (item.balances?.[currentPeriodKey] || 0) * 1000;
 
                     return { title, icon, color, value: val };
                 }).filter((item): item is SummaryItem => item !== null);
@@ -139,33 +163,50 @@ const FinancialCharts = () => {
                 setSummaryData(formattedSummary);
 
                 // --- PROSES DATA 2: CHARTS ---
-                const chartDataMap: Record<string, number> = {};
-                snapCharts.docs.forEach(doc => {
+                let totalRevenue = 0;
+                let totalExpense = 0;
+                const expenseAccounts: ChartData[] = [];
+
+                // Palette warna untuk Pie Chart
+                const chartPalette = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#8dd1e1', '#a4de6c', '#d0ed57'];
+
+                snapCharts.docs.forEach((doc) => {
                     const d = doc.data() as AccountData;
-                    // Ambil nilai absolute (positif) dan dikali 1000
-                    chartDataMap[doc.id] = Math.abs((d.balances?.['2025-09-30'] || 0) * 1000);
+                    const cat = d.category?.toLowerCase() || '';
+                    const val = Math.abs((d.balances?.[currentPeriodKey] || 0) * 1000);
+
+                    // Skip jika nilai 0 atau negatif
+                    if (val <= 0) return;
+
+                    // Cek Kategori Revenue
+                    if (['revenue', 'pendapatan'].some(c => cat.includes(c))) {
+                        totalRevenue += val;
+                    }
+                    // Cek Kategori Expense
+                    else if (['expense', 'beban'].some(c => cat.includes(c))) {
+                        totalExpense += val;
+                        // Masukkan ke Pie Chart Data
+                        expenseAccounts.push({
+                            name: d.name,
+                            value: val,
+                            // Warna belum di-set di sini, nanti di-map ulang atau di-assign saat push
+                        });
+                    }
                 });
 
-                // Hitung Total Beban
-                const totalBeban = (
-                    (chartDataMap['beban_pokok_penjualan'] || 0) +
-                    (chartDataMap['beban_penjualan_dan_pemasaran'] || 0) +
-                    (chartDataMap['beban_umum_dan_administrasi'] || 0) +
-                    (chartDataMap['beban_keuangan'] || 0) +
-                    (chartDataMap['beban_pajak_penghasilan'] || 0)
-                );
+                // Assign warna ke expense items
+                expenseAccounts.sort((a, b) => b.value - a.value); // Sort desc
+                const finalExpenseData = expenseAccounts.map((item, index) => ({
+                    ...item,
+                    fill: chartPalette[index % chartPalette.length]
+                }));
 
                 setRevenueExpenseData([
-                    { name: 'Pendapatan', value: chartDataMap['penjualan_neto'] || 0, fill: '#4ade80' }, // Hijau
-                    { name: 'Total Beban', value: totalBeban, fill: '#f87171' } // Merah
+                    { name: 'Pendapatan', value: totalRevenue, fill: '#4ade80' }, // Hijau
+                    { name: 'Total Beban', value: totalExpense, fill: '#f87171' } // Merah
                 ]);
 
-                setExpenseCompositionData([
-                    { name: 'Beban Pokok (COGS)', value: chartDataMap['beban_pokok_penjualan'] || 0, fill: PIE_COLORS.beban_pokok },
-                    { name: 'Penjualan & Pemasaran', value: chartDataMap['beban_penjualan_dan_pemasaran'] || 0, fill: PIE_COLORS.operasional },
-                    { name: 'Umum & Administrasi', value: chartDataMap['beban_umum_dan_administrasi'] || 0, fill: PIE_COLORS.umum },
-                    { name: 'Keuangan & Pajak', value: (chartDataMap['beban_keuangan'] || 0) + (chartDataMap['beban_pajak_penghasilan'] || 0), fill: PIE_COLORS.keuangan },
-                ].filter(i => i.value > 0));
+                setExpenseCompositionData(finalExpenseData);
 
             } catch (error) {
                 console.error("Error fetching financial data:", error);
@@ -175,7 +216,7 @@ const FinancialCharts = () => {
         };
 
         fetchAllData();
-    }, []);
+    }, [selectedPeriod]);
 
     return (
         <div className="w-full space-y-8">
@@ -183,8 +224,31 @@ const FinancialCharts = () => {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h2 className="text-2xl font-bold text-white">Dashboard Keuangan</h2>
-                    <p className="text-gray-400 text-sm">Laporan Konsolidasian Per 30 September 2025</p>
+                    <p className="text-gray-400 text-sm">
+                        Laporan Konsolidasian Periode {selectedPeriod ? selectedPeriod.label : "Memuat..."}
+                    </p>
                 </div>
+
+                {/* --- PERIOD SELECTOR --- */}
+                {periods.length > 0 && (
+                    <div className="bg-[#1a1a1f] px-4 py-2 rounded-lg border border-[#2a2a2f] flex items-center gap-2">
+                        <Calendar size={18} className="text-gray-400" />
+                        <select
+                            className="bg-transparent text-white text-sm outline-none cursor-pointer"
+                            value={selectedPeriod?.id || ""}
+                            onChange={(e) => {
+                                const p = periods.find(p => p.id === e.target.value);
+                                if (p) setSelectedPeriod(p);
+                            }}
+                        >
+                            {periods.map((p) => (
+                                <option key={p.id} value={p.id} className="bg-[#1a1a1f] text-white">
+                                    {p.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
             </div>
 
             {loading ? (
@@ -204,7 +268,7 @@ const FinancialCharts = () => {
                                     <div className={item.color}>{item.icon}</div>
                                 </div>
                                 <p className="text-gray-400 text-sm mb-1">{item.title}</p>
-                                <h3 
+                                <h3
                                     className={`text-xl font-bold cursor-pointer select-none ${item.color.includes('cyan') ? 'text-cyan-400' : 'text-white'}`}
                                     onClick={() => setIsShortFormat(!isShortFormat)}
                                     title="Klik untuk ubah format"
@@ -224,9 +288,9 @@ const FinancialCharts = () => {
                                     <BarChart data={revenueExpenseData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                                         <CartesianGrid strokeDasharray="3 3" stroke="#333" />
                                         <XAxis dataKey="name" stroke="#9ca3af" fontSize={12} />
-                                        <YAxis stroke="#9ca3af" fontSize={12} tickFormatter={(val) => isShortFormat ? `${(val/1e12).toFixed(0)}T` : `${(val/1e12).toFixed(1)}T`} />
+                                        <YAxis stroke="#9ca3af" fontSize={12} tickFormatter={(val) => isShortFormat ? `${(val / 1e12).toFixed(0)}T` : `${(val / 1e12).toFixed(1)}T`} />
                                         <Tooltip
-                                            cursor={{fill: 'transparent'}}
+                                            cursor={{ fill: 'transparent' }}
                                             contentStyle={{ backgroundColor: '#1a1a1f', borderColor: '#333', color: '#fff' }}
                                             itemStyle={{ color: '#fff' }}
                                             formatter={(value: number) => [formatCurrency(value), "Nilai"]}
@@ -265,8 +329,8 @@ const FinancialCharts = () => {
                                             itemStyle={{ color: '#fff' }}
                                             formatter={(value: number) => [formatCurrency(value), "Nilai"]}
                                         />
-                                        <Legend 
-                                            verticalAlign="bottom" 
+                                        <Legend
+                                            verticalAlign="bottom"
                                             height={36}
                                             formatter={(value) => <span className="text-gray-400 text-xs ml-2">{value}</span>}
                                         />

@@ -106,6 +106,19 @@ const Navbar: React.FC<NavbarProps> = ({
               Buku Besar
             </a>
 
+            {/* Tutup Buku */}
+            <a
+              href="/tutup-buku"
+              className="
+                hover:text-[#00bcd4]
+                text-gray-300
+                transition-all duration-200
+                hover:drop-shadow-[0_0_6px_#00bcd4]
+              "
+            >
+              Tutup Buku
+            </a>
+
             {/* Dropdown Akun Aset */}
             <div className="relative" ref={asetRef}>
               <button
@@ -212,6 +225,13 @@ const Navbar: React.FC<NavbarProps> = ({
               className="block text-gray-300 hover:text-[#00bcd4] transition-colors duration-200"
             >
               Buku Besar
+            </a>
+            {/* Tutup Buku - Mobile */}
+            <a
+              href="/tutup-buku"
+              className="block text-gray-300 hover:text-[#00bcd4] transition-colors duration-200"
+            >
+              Tutup Buku
             </a>
             {/* Dropdown Akun Aset - Mobile */}
             <div>

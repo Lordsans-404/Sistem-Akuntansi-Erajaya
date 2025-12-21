@@ -225,9 +225,8 @@ const ErajayaLandingPage: React.FC = () => {
           return (
             <div
               key={idx}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                isActive ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${isActive ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               {/* Overlay gelap di atas gambar */}
               {idx != 0 && (<div className="absolute inset-0 bg-black/40 z-10" />)}

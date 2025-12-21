@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     const startDate = searchParams.get('start_date');
     const endDate = searchParams.get('end_date');
 
-    let query = db.collection("journals").orderBy("date", "desc");
+    let query = db.collection("journals").orderBy("created_at", "desc");
 
     if (startDate) {
       const start = Timestamp.fromDate(new Date(startDate));
@@ -94,12 +94,12 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { date, description, entries, period, pass } = body;
-    
-    if(pass != password){
+
+    if (pass != password) {
       return NextResponse.json(
         { error: "Wrong Password" },
         { status: 401 }
-      );      
+      );
     }
 
     if (!date || !description || !Array.isArray(entries) || entries.length < 2) {
@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
       totalCredit += credit;
 
       return {
-        account:e.account,
+        account: e.account,
         debit,
         credit
       };
